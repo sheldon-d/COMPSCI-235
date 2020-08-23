@@ -40,7 +40,7 @@ class Comment:
     ):
         self._user: User = user
         self._article: Article = article
-        self._comment: Comment = comment
+        self._comment: str = comment
         self._timestamp: datetime = timestamp
 
     @property
