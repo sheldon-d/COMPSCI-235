@@ -1,6 +1,6 @@
 from datetime import date, datetime
 from typing import List
-import os
+from pathlib import Path
 
 import pytest
 
@@ -10,8 +10,7 @@ from covid.adapters.memory_repository import MemoryRepository
 from covid.adapters.repository import RepositoryException
 
 
-TEST_DATA_PATH = os.path.join('C:', os.sep, 'Users', 'ianwo', 'OneDrive', 'Documents', 'PythonDev', 'repo 02.07.2020',
-                              'COVID-19', 'tests', 'data')
+TEST_DATA_PATH = Path.cwd().joinpath('tests', 'data')
 
 
 @pytest.fixture
@@ -224,6 +223,3 @@ def test_repository_does_not_add_a_comment_without_an_article_properly_attached(
 
 def test_repository_can_retrieve_comments(in_memory_repo):
     assert len(in_memory_repo.get_comments()) == 2
-
-
-
