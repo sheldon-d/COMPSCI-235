@@ -1,4 +1,4 @@
-import os
+from pathlib import Path
 import pytest
 
 from covid import create_app
@@ -6,9 +6,7 @@ from covid.adapters import memory_repository
 from covid.adapters.memory_repository import MemoryRepository
 
 
-TEST_DATA_PATH = os.path.join('C:', os.sep, 'Users', 'ianwo', 'OneDrive', 'Documents', 'PythonDev', 'repo 02.07.2020',
-                              'COVID-19', 'tests', 'data')
-#TEST_DATA_PATH = os.path.join('C:', os.sep, 'Users', 'iwar006', 'Documents', 'Python dev', 'COVID-19', 'tests', 'data')
+TEST_DATA_PATH = Path.cwd().joinpath('tests', 'data')
 
 
 @pytest.fixture
