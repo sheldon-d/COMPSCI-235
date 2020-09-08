@@ -5,6 +5,13 @@ from wtforms.validators import DataRequired
 
 import people_web_app.adapters.repository as repo
 
+
+class SearchForm(FlaskForm):
+
+    person_id = IntegerField('Person id', [DataRequired(message='An id number is required')])
+    submit = SubmitField('Find')
+
+
 people_blueprint = Blueprint(
     'people_bp', __name__
 )
@@ -21,12 +28,32 @@ def home():
 
 @people_blueprint.route('/list')
 def list_people():
-    pass
+    return render_template(
+        'list_people.html',
+        people=repo.repo_instance,
+        find_person_url=url_for('people_bp.find_person'),
+        list_people_url=url_for('people_bp.list_people')
+    )
 
 
 @people_blueprint.route('/find', methods=['GET', 'POST'])
 def find_person():
-    pass
+    form = SearchForm()
 
+    if form.validate_on_submit():
+        person_id = form.person_id.data
+        person = repo.repo_instance.get_person(person_id)
 
-
+        return render_template(
+            'list_person.html',
+            find_person_url=url_for('people_bp.find_person'),
+            list_people_url=url_for('people_bp.list_people'),
+            person=person
+        )
+    return render_template(
+        'find_person.html',
+        find_person_url=url_for('people_bp.find_person'),
+        list_people_url=url_for('people_bp.list_people'),
+        handler_url=url_for('people_bp.find_person'),
+        form=form
+    )

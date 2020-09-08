@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<main>
+    <div>
+        <form method="POST" action="{{ handler_url }}">
+            {{ form.csrf_token }}
+            <div> {{ form.person_id.label }} {{ form.person_id }}
+                {% if form.person_id.errors %}
+                    <ul>
+                        {% for error in form.person_id.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            {{ form.submit }}
+        </form>
+    </div>
+</main>
+
+{% endblock %}
