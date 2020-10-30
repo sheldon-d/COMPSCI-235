@@ -1,5 +1,5 @@
-import os
 import pytest
+from pathlib import Path
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, clear_mappers
@@ -11,9 +11,8 @@ from covid.adapters.memory_repository import MemoryRepository
 
 
 #TODO: You have to adapt these paths to your file structure
-TEST_DATA_PATH_MEMORY = os.path.join('E:', os.sep, '01_Repos', 'COMPSCI-235', 'tests', 'data', 'memory')
-TEST_DATA_PATH_DATABASE = os.path.join('E:', os.sep, '01_Repos', 'COMPSCI-235', 'tests', 'data', 'database')
-
+TEST_DATA_PATH_MEMORY = str(Path.cwd().joinpath('tests', 'data', 'memory'))
+TEST_DATA_PATH_DATABASE = str(Path.cwd().joinpath('tests', 'data', 'database'))
 
 TEST_DATABASE_URI_IN_MEMORY = 'sqlite://'
 TEST_DATABASE_URI_FILE = 'sqlite:///covid-19-test.db'
